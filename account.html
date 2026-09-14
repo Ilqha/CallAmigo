@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings | CallAmigo</title>
+
+ <style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#e4eee5;
+    color:#173b2b;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    height:75px;
+    background:#e4eee5;
+    border-bottom:1px solid #cbd9cd;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+}
+
+.logo img{
+    width:170px;
+    height:auto;
+    display:block;
+}
+
+.back-btn{
+    border:1px solid #cbd8ce;
+    background:#fffdf8;
+    color:#176b45;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.2s;
+}
+
+.back-btn:hover{
+    border-color:#1d6244;
+    transform:translateY(-1px);
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    width:90%;
+    max-width:850px;
+    margin:45px auto;
+}
+
+.heading{
+    margin-bottom:25px;
+}
+
+.heading h1{
+    font-size:32px;
+    margin-bottom:8px;
+    color:#173c2c;
+    letter-spacing:-.4px;
+}
+
+.heading p{
+    color:#68756d;
+    font-size:15px;
+}
+
+/* ================= PROFILE ================= */
+
+.profile-card{
+    background:#fffdf8;
+    border:1px solid #d4dfd5;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(30,70,45,.07);
+    margin-bottom:20px;
+}
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:30px;
+    padding-bottom:25px;
+    border-bottom:1px solid #dce6de;
+}
+
+.avatar{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:#1d6244;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    font-weight:700;
+    box-shadow:0 6px 16px rgba(29,98,68,.14);
+}
+
+.profile-top h2{
+    font-size:21px;
+    margin-bottom:5px;
+    color:#294438;
+}
+
+.profile-top p{
+    color:#7a8c82;
+    font-size:14px;
+}
+
+.section-title{
+    font-size:17px;
+    margin-bottom:18px;
+    color:#294438;
+}
+
+/* ================= INFO GRID ================= */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.info-box{
+    background:#edf5ee;
+    border:1px solid #d6e3d8;
+    border-radius:13px;
+    padding:17px;
+    transition:.2s;
+}
+
+.info-box:hover{
+    transform:translateY(-2px);
+    border-color:#9dbba7;
+    box-shadow:0 7px 18px rgba(30,70,45,.06);
+}
+
+.label{
+    font-size:12px;
+    color:#789084;
+    margin-bottom:7px;
+}
+
+.value{
+    font-size:15px;
+    font-weight:600;
+    color:#173b2b;
+    word-break:break-word;
+}
+
+/* ================= LEARNING CARD ================= */
+
+.learning-card{
+    background:#1d6244;
+    color:white;
+    border-radius:18px;
+    padding:25px;
+    margin-top:20px;
+    box-shadow:0 10px 28px rgba(29,98,68,.13);
+}
+
+.learning-card h3{
+    margin-bottom:8px;
+}
+
+.learning-card p{
+    opacity:.88;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.edit-btn{
+    margin-top:22px;
+    border:none;
+    background:#fffdf8;
+    color:#176b45;
+    padding:11px 18px;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.edit-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(0,0,0,.08);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:650px){
+
+    .header{
+        padding:0 5%;
+    }
+
+.logo img{
+    width:145px;
+}
+
+    .back-btn{
+        padding:9px 13px;
+        font-size:12px;
+    }
+
+    .container{
+        width:92%;
+        margin:30px auto;
+    }
+
+    .heading h1{
+        font-size:28px;
+    }
+
+    .profile-card{
+        padding:22px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .profile-top{
+        align-items:flex-start;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo" onclick="goDashboard()">
+    <img src="callamigo-logo.png" alt="CallAmigo">
+</div>
+
+        <button class="back-btn" onclick="goDashboard()">
+            ← Dashboard
+        </button>
+    </header>
+
+    <main class="container">
+
+        <div class="heading">
+            <h1>Account Settings</h1>
+            <p>View your CallAmigo profile and learning preferences.</p>
+        </div>
+
+        <div class="profile-card">
+
+            <div class="profile-top">
+                <div class="avatar" id="avatar">CA</div>
+
+                <div>
+                    <h2 id="profileName">Loading...</h2>
+                    <p id="profileEmail">Loading...</p>
+                </div>
+            </div>
+
+            <h3 class="section-title">Personal information</h3>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <div class="label">Full name</div>
+                    <div class="value" id="name">—</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Email</div>
+                    <div class="value" id="email">—</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Phone number</div>
+                    <div class="value" id="phone">—</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Native language</div>
+                    <div class="value" id="nativeLanguage">—</div>
+                </div>
+
+            </div>
+
+            <h3 class="section-title" style="margin-top:30px;">
+                Learning preferences
+            </h3>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <div class="label">Learning language</div>
+                    <div class="value" id="language">—</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Level</div>
+                    <div class="value" id="level">—</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Language score</div>
+                    <div class="value" id="score">—</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="label">Practice mode</div>
+                    <div class="value" id="practiceMode">—</div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="learning-card">
+
+            <h3>Keep practicing 🌱</h3>
+
+            <p>
+                Your profile helps CallAmigo personalize your
+                conversations and practice experience.
+            </p>
+
+            <button class="edit-btn" onclick="editSetup()">
+                Edit learning setup
+            </button>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        const user = JSON.parse(
+            localStorage.getItem("user")
+        );
+
+        if (!user) {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            document.getElementById("profileName").textContent =
+                user.name || "CallAmigo User";
+
+            document.getElementById("profileEmail").textContent =
+                user.email || "";
+
+            document.getElementById("name").textContent =
+                user.name || "—";
+
+            document.getElementById("email").textContent =
+                user.email || "—";
+
+            document.getElementById("phone").textContent =
+                user.phone || "Not provided";
+
+            document.getElementById("nativeLanguage").textContent =
+                user.nativeLanguage || "—";
+
+            document.getElementById("language").textContent =
+                user.language || "—";
+
+            document.getElementById("level").textContent =
+                user.level || "—";
+
+            if (user.languageScoreType && user.languageScore) {
+
+                document.getElementById("score").textContent =
+                    user.languageScoreType + ": " +
+                    user.languageScore;
+
+            } else {
+
+                document.getElementById("score").textContent =
+                    "Not provided";
+
+            }
+
+            document.getElementById("practiceMode").textContent =
+                user.practiceMode === "call"
+                    ? "Start a conversation"
+                    : user.practiceMode === "situation"
+                    ? "Choose a situation"
+                    : "—";
+
+            const firstLetter =
+                (user.name || "C").charAt(0).toUpperCase();
+
+            document.getElementById("avatar").textContent =
+                firstLetter;
+        }
+
+
+        function goDashboard() {
+            window.location.href = "dashboard.html";
+        }
+
+
+        function editSetup() {
+            window.location.href = "setup.html";
+        }
+
+    </script>
+
+</body>
+</html>

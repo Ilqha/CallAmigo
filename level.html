@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Level - CallAmigo</title>
+
+    <style>
+
+        /* ================= GENERAL ================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #e4eee5;
+            color: #17231d;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 75px;
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #e4eee5;
+            border-bottom: 1px solid #cbd9cd;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .logo img {
+            width: 170px;
+            height: auto;
+            display: block;
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-btn {
+            border: 1px solid #cbd8ce;
+            background: #fffdf8;
+            color: #294438;
+
+            padding: 10px 17px;
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .back-btn:hover {
+            border-color: #1d6244;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(30, 70, 45, 0.08);
+        }
+
+        .back-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 900px;
+            margin: 55px auto;
+            padding: 0 25px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+
+            color: #173c2c;
+
+            letter-spacing: -0.6px;
+        }
+
+        .heading p {
+            color: #68756d;
+        }
+
+
+        /* ================= SELECTED LANGUAGE ================= */
+
+        .selected-language {
+            width: fit-content;
+
+            margin: 0 auto 30px;
+
+            padding: 9px 17px;
+
+            background: #d8e8da;
+            color: #276346;
+
+            border: 1px solid #c4d8c7;
+            border-radius: 30px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .selected-language:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(30, 70, 45, 0.06);
+        }
+
+
+        /* ================= LEVELS ================= */
+
+        .level-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .level-card,
+        .unknown-card {
+            background: #fffdf8;
+
+            border: 1px solid #d4dfd5;
+            border-radius: 18px;
+
+            padding: 25px;
+
+            cursor: pointer;
+
+            min-height: 150px;
+
+            box-shadow: 0 8px 25px rgba(30, 70, 45, 0.05);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .level-card:hover,
+        .unknown-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #9dbba7;
+
+            box-shadow: 0 12px 28px rgba(30, 70, 45, 0.10);
+        }
+
+        .level-card:active,
+        .unknown-card:active {
+            transform: translateY(-1px) scale(0.99);
+        }
+
+        .level-card.selected,
+        .unknown-card.selected {
+            border: 2px solid #1d6244;
+
+            background: #edf5ee;
+
+            box-shadow: 0 10px 25px rgba(29, 98, 68, 0.10);
+        }
+
+
+        /* ================= LEVEL ICON ================= */
+
+        .level-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+
+            transition: transform 0.2s ease;
+        }
+
+        .level-card:hover .level-icon {
+            transform: scale(1.08);
+        }
+
+
+        /* ================= LEVEL TEXT ================= */
+
+        .level-name {
+            font-size: 18px;
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+            color: #294438;
+        }
+
+        .level-description {
+            color: #7b877f;
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .unknown-card strong {
+            display: block;
+
+            font-size: 18px;
+
+            margin-bottom: 10px;
+
+            color: #294438;
+        }
+
+        .unknown-card p {
+            color: #7b877f;
+
+            font-size: 12px;
+            line-height: 1.5;
+
+            margin: 0;
+        }
+
+
+        /* ================= PROFICIENCY ================= */
+
+        .proficiency {
+            margin-top: 35px;
+
+            background: #fffdf8;
+
+            border: 1px solid #d4dfd5;
+            border-radius: 20px;
+
+            padding: 25px;
+
+            box-shadow: 0 10px 30px rgba(30, 70, 45, 0.06);
+
+            transition: 0.2s ease;
+        }
+
+        .proficiency:hover {
+            transform: translateY(-2px);
+
+            box-shadow: 0 13px 32px rgba(30, 70, 45, 0.08);
+
+            border-color: #c1d3c5;
+        }
+
+        .proficiency h2 {
+            margin-top: 0;
+
+            font-size: 21px;
+
+            color: #294438;
+        }
+
+        .proficiency p {
+            color: #68756d;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+
+        /* ================= INPUT FIELDS ================= */
+
+        .fields {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+        }
+
+        .field label {
+            display: block;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+            color: #294438;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+
+            padding: 11px;
+
+            border: 1px solid #d1ddd3;
+            border-radius: 9px;
+
+            outline: none;
+
+            background: #ffffff;
+            color: #29382f;
+
+            transition: 0.2s ease;
+        }
+
+        .field input:hover,
+        .field select:hover {
+            border-color: #9dbba7;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: #1d6244;
+
+            box-shadow: 0 0 0 3px rgba(29, 98, 68, 0.08);
+        }
+
+
+        /* ================= SKIP TEXT ================= */
+
+        .skip {
+            margin-top: 15px;
+
+            font-size: 12px;
+
+            color: #7b877f;
+        }
+
+
+        /* ================= CONTINUE BUTTON ================= */
+
+        .continue-btn {
+            display: block;
+
+            margin: 30px auto 0;
+
+            border: none;
+
+            background: #1d6244;
+            color: white;
+
+            padding: 14px 25px;
+
+            border-radius: 11px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .continue-btn:hover:not(:disabled) {
+            background: #174d36;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 8px 18px rgba(29, 98, 68, 0.16);
+        }
+
+        .continue-btn:active:not(:disabled) {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .continue-btn:disabled {
+            background: #aebbb1;
+
+            cursor: not-allowed;
+        }
+
+
+        /* ================= MESSAGE ================= */
+
+        #message {
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #b25b5b;
+
+            font-size: 13px;
+
+            min-height: 18px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .container {
+                margin: 40px auto;
+                padding: 0 18px;
+            }
+
+            .heading h1 {
+                font-size: 32px;
+            }
+
+            .level-grid,
+            .fields {
+                grid-template-columns: 1fr;
+            }
+
+            .level-card,
+            .unknown-card {
+                min-height: auto;
+            }
+
+            .proficiency {
+                padding: 21px 18px;
+            }
+        }
+
+
+        /* ================= SMALL MOBILE ================= */
+
+        @media (max-width: 450px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .logo img {
+                width: 120px;
+            }
+
+            .back-btn {
+                padding: 9px 13px;
+                font-size: 12px;
+            }
+
+            .heading h1 {
+                font-size: 28px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            <img
+                src="callamigo-logo.png"
+                alt="CallAmigo">
+        </div>
+
+        <button
+            class="back-btn"
+            onclick="goBack()">
+
+            ← Language
+
+        </button>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <!-- ================= HEADING ================= -->
+
+        <div class="heading">
+
+            <h1>
+                What's your language level? 📊
+            </h1>
+
+            <p>
+                This helps CallAmigo adjust the conversation to you.
+            </p>
+
+        </div>
+
+
+        <!-- ================= SELECTED LANGUAGE ================= -->
+
+        <div
+            class="selected-language"
+            id="selectedLanguage">
+
+            Loading language...
+
+        </div>
+
+
+        <!-- ================= LEVEL GRID ================= -->
+
+        <div class="level-grid">
+
+
+            <!-- BEGINNER -->
+
+            <div
+                class="level-card"
+                onclick="selectLevel('Beginner', this)">
+
+                <div class="level-icon">
+                    🌱
+                </div>
+
+                <div class="level-name">
+                    Beginner
+                </div>
+
+                <div class="level-description">
+                    I know basic words and phrases and I'm starting to speak.
+                </div>
+
+            </div>
+
+
+            <!-- INTERMEDIATE -->
+
+            <div
+                class="level-card"
+                onclick="selectLevel('Intermediate', this)">
+
+                <div class="level-icon">
+                    🌿
+                </div>
+
+                <div class="level-name">
+                    Intermediate
+                </div>
+
+                <div class="level-description">
+                    I can have simple conversations and understand common topics.
+                </div>
+
+            </div>
+
+
+            <!-- ADVANCED -->
+
+            <div
+                class="level-card"
+                onclick="selectLevel('Advanced', this)">
+
+                <div class="level-icon">
+                    🌳
+                </div>
+
+                <div class="level-name">
+                    Advanced
+                </div>
+
+                <div class="level-description">
+                    I can communicate comfortably and discuss complex topics.
+                </div>
+
+            </div>
+
+
+            <!-- DON'T KNOW -->
+
+            <div
+                class="unknown-card"
+                onclick="selectLevel('Unknown', this)">
+
+                <strong>
+                    🤔 I don't know my level
+                </strong>
+
+                <p>
+                    Let CallAmigo help determine an appropriate starting level.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= PROFICIENCY ================= -->
+
+        <div class="proficiency">
+
+            <h2>
+                📈 Add your proficiency information
+            </h2>
+
+            <p>
+                Optional. Add any score or level you already know.
+                You can also skip this.
+            </p>
+
+
+            <div class="fields">
+
+
+                <!-- DUOLINGO -->
+
+                <div class="field">
+
+                    <label>
+                        Duolingo Score
+                    </label>
+
+                    <input
+                        type="number"
+                        id="duolingo"
+                        placeholder="e.g. 80">
+
+                </div>
+
+
+                <!-- CEFR -->
+
+                <div class="field">
+
+                    <label>
+                        CEFR Level
+                    </label>
+
+                    <select id="cefr">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="A1">
+                            A1
+                        </option>
+
+                        <option value="A2">
+                            A2
+                        </option>
+
+                        <option value="B1">
+                            B1
+                        </option>
+
+                        <option value="B2">
+                            B2
+                        </option>
+
+                        <option value="C1">
+                            C1
+                        </option>
+
+                        <option value="C2">
+                            C2
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TOEFL -->
+
+                <div class="field">
+
+                    <label>
+                        TOEFL Score
+                    </label>
+
+                    <input
+                        type="number"
+                        id="toefl"
+                        placeholder="e.g. 80">
+
+                </div>
+
+            </div>
+
+
+            <div class="skip">
+
+                You can leave all of these blank if you don't know them.
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= CONTINUE ================= -->
+
+        <button
+            id="continueBtn"
+            class="continue-btn"
+            onclick="continueNext()"
+            disabled>
+
+            Continue →
+
+        </button>
+
+
+        <div id="message"></div>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const token =
+            localStorage.getItem("token");
+
+
+        const language =
+            JSON.parse(
+                localStorage.getItem("selectedLanguage")
+            );
+
+
+        let selectedLevel = null;
+
+
+        /* ================= LOGIN CHECK ================= */
+
+        if (!token) {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        /* ================= LANGUAGE CHECK ================= */
+
+        if (!language) {
+
+            window.location.href = "language.html";
+
+        } else {
+
+            document.getElementById(
+                "selectedLanguage"
+            ).textContent =
+                language.flag +
+                " " +
+                language.name +
+                " selected";
+
+        }
+
+
+        /* ================= SELECT LEVEL ================= */
+
+        function selectLevel(level, element) {
+
+            selectedLevel = level;
+
+
+            document
+                .querySelectorAll(
+                    ".level-card, .unknown-card"
+                )
+                .forEach(card => {
+
+                    card.classList.remove("selected");
+
+                });
+
+
+            element.classList.add("selected");
+
+
+            document.getElementById(
+                "continueBtn"
+            ).disabled = false;
+
+        }
+
+
+        /* ================= CONTINUE ================= */
+
+        function continueNext() {
+
+            if (!selectedLevel) {
+
+                return;
+
+            }
+
+
+            const proficiency = {
+
+                duolingo:
+                    document.getElementById(
+                        "duolingo"
+                    ).value,
+
+                cefr:
+                    document.getElementById(
+                        "cefr"
+                    ).value,
+
+                toefl:
+                    document.getElementById(
+                        "toefl"
+                    ).value
+
+            };
+
+
+            const levelData = {
+
+                level: selectedLevel,
+
+                proficiency: proficiency
+
+            };
+
+
+            localStorage.setItem(
+                "languageLevel",
+                JSON.stringify(levelData)
+            );
+
+
+            window.location.href =
+                "practice-mode.html";
+
+        }
+
+
+        /* ================= BACK ================= */
+
+        function goBack() {
+
+            window.location.href =
+                "language.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

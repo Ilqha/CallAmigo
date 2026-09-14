@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Set Up CallAmigo</title>
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#e4eee5;
+    color:#17231d;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    height:75px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#e4eee5;
+    border-bottom:1px solid #cbd9cd;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    width:170px;
+    height:auto;
+    display:block;
+}
+
+.back-btn{
+    border:1px solid #cbd8ce;
+    background:#fffdf8;
+    color:#294438;
+    padding:10px 17px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.back-btn:hover{
+    border-color:#1d6244;
+    transform:translateY(-1px);
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    max-width:760px;
+    margin:50px auto;
+    padding:0 25px;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.heading h1{
+    font-size:38px;
+    margin-bottom:10px;
+    color:#173c2c;
+    letter-spacing:-.6px;
+}
+
+.heading p{
+    color:#68756d;
+    line-height:1.6;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress-area{
+    margin-bottom:40px;
+}
+
+.progress-line{
+    height:4px;
+    background:#cddbcf;
+    border-radius:10px;
+    position:relative;
+    margin:0 30px;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:#1d6244;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.progress-steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    margin-top:-14px;
+}
+
+.progress-step{
+    text-align:center;
+    font-size:11px;
+    color:#7d8981;
+}
+
+.progress-dot{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#cddbcf;
+    color:#6f7c73;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 8px;
+    font-weight:600;
+    position:relative;
+    border:3px solid #e4eee5;
+}
+
+.progress-step.active .progress-dot,
+.progress-step.completed .progress-dot{
+    background:#1d6244;
+    color:white;
+}
+
+.progress-step.active{
+    color:#1d6244;
+    font-weight:600;
+}
+
+/* ================= CARD ================= */
+
+.setup-card{
+    background:#fffdf8;
+    border:1px solid #d4dfd5;
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 20px 55px rgba(30,70,45,.10);
+}
+
+.step{
+    display:none;
+}
+
+.step.active{
+    display:block;
+}
+
+.step-label{
+    text-align:center;
+    color:#62806d;
+    font-size:11px;
+    font-weight:600;
+    margin-bottom:10px;
+    letter-spacing:.5px;
+}
+
+.step h2{
+    text-align:center;
+    font-size:27px;
+    margin-bottom:8px;
+    color:#173c2c;
+}
+
+.step-description{
+    text-align:center;
+    color:#68756d;
+    font-size:13px;
+    margin-bottom:28px;
+}
+
+/* ================= OPTIONS ================= */
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.option{
+    border:1px solid #d5dfd7;
+    background:#f8faf7;
+    border-radius:15px;
+    padding:17px;
+    cursor:pointer;
+    transition:.2s;
+    text-align:left;
+}
+
+.option:hover{
+    border-color:#7fa58c;
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(30,70,45,.07);
+}
+
+.option.selected{
+    border:2px solid #1d6244;
+    background:#edf5ee;
+    box-shadow:0 6px 18px rgba(29,98,68,.08);
+}
+
+.option-title{
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:5px;
+    color:#294438;
+}
+
+.option-description{
+    color:#7b877f;
+    font-size:11px;
+    line-height:1.5;
+}
+
+.option-icon{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+/* ================= NATIVE SEARCH ================= */
+
+.native-search{
+    display:none;
+    margin-top:15px;
+    padding:18px;
+    background:#f0f5f0;
+    border:1px solid #d7e2d8;
+    border-radius:16px;
+}
+
+.native-search.active{
+    display:block;
+}
+
+.native-search p{
+    margin:0 0 10px;
+    color:#59675e;
+    font-size:12px;
+}
+
+.native-search input{
+    width:100%;
+    padding:13px;
+    border:1px solid #d1ddd3;
+    border-radius:10px;
+    background:white;
+    font-size:13px;
+    outline:none;
+}
+
+.native-search input:focus{
+    border-color:#1d6244;
+    box-shadow:0 0 0 3px rgba(29,98,68,.08);
+}
+
+.native-search-result{
+    margin-top:10px;
+    padding:11px 13px;
+    background:white;
+    border:1px solid #d1ddd3;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:13px;
+    display:none;
+}
+
+.native-search-result:hover{
+    border-color:#1d6244;
+    background:#edf5ee;
+}
+
+/* ================= LEVEL ================= */
+
+.level-options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.level-card{
+    border:1px solid #d5dfd7;
+    background:#f8faf7;
+    border-radius:15px;
+    padding:20px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.level-card:hover{
+    border-color:#7fa58c;
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(30,70,45,.07);
+}
+
+.level-card.selected{
+    border:2px solid #1d6244;
+    background:#edf5ee;
+}
+
+.level-card h3{
+    margin:0 0 6px;
+    font-size:15px;
+    color:#294438;
+}
+
+.level-card p{
+    margin:0;
+    color:#7b877f;
+    font-size:11px;
+    line-height:1.5;
+}
+
+/* ================= SCORE ================= */
+
+.score-section{
+    margin-top:25px;
+    padding:20px;
+    background:#f0f5f0;
+    border:1px solid #d7e2d8;
+    border-radius:16px;
+}
+
+.score-section h3{
+    font-size:14px;
+    margin:0 0 7px;
+    color:#294438;
+}
+
+.score-section p{
+    color:#7b877f;
+    font-size:11px;
+    margin:0 0 15px;
+}
+
+.score-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+select,
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1ddd3;
+    border-radius:10px;
+    background:white;
+    font-size:12px;
+    outline:none;
+    color:#29382f;
+}
+
+select:focus,
+input:focus{
+    border-color:#1d6244;
+    box-shadow:0 0 0 3px rgba(29,98,68,.08);
+}
+
+/* ================= PRACTICE ================= */
+
+.practice-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.practice-card{
+    border:1px solid #d5dfd7;
+    background:#f8faf7;
+    border-radius:17px;
+    padding:23px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.practice-card:hover{
+    border-color:#7fa58c;
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(30,70,45,.08);
+}
+
+.practice-card.selected{
+    border:2px solid #1d6244;
+    background:#edf5ee;
+}
+
+.practice-icon{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.practice-card h3{
+    margin:0 0 7px;
+    font-size:16px;
+    color:#294438;
+}
+
+.practice-card p{
+    margin:0;
+    color:#7b877f;
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* ================= BUTTONS ================= */
+
+.buttons{
+    display:flex;
+    justify-content:space-between;
+    margin-top:30px;
+    gap:12px;
+}
+
+.prev-btn{
+    border:1px solid #cbd8ce;
+    background:#fffdf8;
+    color:#294438;
+    padding:13px 22px;
+    border-radius:11px;
+    cursor:pointer;
+    font-size:13px;
+    transition:.2s;
+}
+
+.prev-btn:hover{
+    border-color:#1d6244;
+}
+
+.next-btn{
+    margin-left:auto;
+    border:none;
+    background:#1d6244;
+    color:white;
+    padding:13px 23px;
+    border-radius:11px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.next-btn:hover:not(:disabled){
+    background:#174d36;
+    transform:translateY(-1px);
+}
+
+.next-btn:disabled{
+    background:#aebbb1;
+    cursor:not-allowed;
+}
+
+#message{
+    text-align:center;
+    color:#b25b5b;
+    font-size:12px;
+    margin-top:15px;
+    min-height:18px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:600px){
+
+    nav{
+        padding:0 5%;
+    }
+
+    .container{
+        margin:35px auto;
+        padding:0 16px;
+    }
+
+    .setup-card{
+        padding:25px 18px;
+        border-radius:21px;
+    }
+
+    .heading h1{
+        font-size:30px;
+    }
+
+    .heading p{
+        font-size:13px;
+    }
+
+    .options,
+    .level-options,
+    .practice-options{
+        grid-template-columns:1fr;
+    }
+
+    .score-row{
+        grid-template-columns:1fr;
+    }
+
+    .progress-area{
+        margin-bottom:30px;
+    }
+
+    .progress-line{
+        margin:0 20px;
+    }
+
+    .progress-step{
+        font-size:9px;
+    }
+
+    .progress-dot{
+        width:26px;
+        height:26px;
+    }
+
+.logo img{
+    width:120px;
+}
+
+    .back-btn{
+        padding:9px 13px;
+        font-size:12px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+<div class="logo">
+    <img src="callamigo-logo.png" alt="CallAmigo">
+</div>
+    <button class="back-btn" onclick="goBack()">
+        ← Back
+    </button>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+    <div class="heading">
+
+        <h1>Let's personalize your journey ✨</h1>
+
+        <p>
+            A few quick steps and your AI language friend
+            will be ready for you.
+        </p>
+
+    </div>
+
+
+    <!-- ================= PROGRESS ================= -->
+
+    <div class="progress-area">
+
+        <div class="progress-line">
+
+            <div
+                class="progress-fill"
+                id="progressFill">
+            </div>
+
+        </div>
+
+
+        <div class="progress-steps">
+
+            <div class="progress-step active" id="progress1">
+
+                <div class="progress-dot">
+                    1
+                </div>
+
+                Language
+
+            </div>
+
+
+            <div class="progress-step" id="progress2">
+
+                <div class="progress-dot">
+                    2
+                </div>
+
+                Native
+
+            </div>
+
+
+            <div class="progress-step" id="progress3">
+
+                <div class="progress-dot">
+                    3
+                </div>
+
+                Level
+
+            </div>
+
+
+            <div class="progress-step" id="progress4">
+
+                <div class="progress-dot">
+                    4
+                </div>
+
+                Practice
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SETUP CARD ================= -->
+
+    <div class="setup-card">
+
+
+        <!-- ================= STEP 1 ================= -->
+
+        <div class="step active" id="step1">
+
+            <div class="step-label">
+                STEP 1 OF 4
+            </div>
+
+            <h2>
+                What do you want to learn? 🌍
+            </h2>
+
+            <p class="step-description">
+                Choose the language you want to practice.
+            </p>
+
+
+            <div class="options">
+
+                <div class="option"
+                     onclick="selectLanguage('English','🇬🇧',this)">
+
+                    <div class="option-icon">🇬🇧</div>
+
+                    <div class="option-title">
+                        English
+                    </div>
+
+                    <div class="option-description">
+                        Practice speaking English naturally.
+                    </div>
+
+                </div>
+
+
+                <div class="option"
+                     onclick="selectLanguage('Spanish','🇪🇸',this)">
+
+                    <div class="option-icon">🇪🇸</div>
+
+                    <div class="option-title">
+                        Spanish
+                    </div>
+
+                    <div class="option-description">
+                        Practice everyday Spanish conversations.
+                    </div>
+
+                </div>
+
+
+                <div class="option"
+                     onclick="selectLanguage('Korean','🇰🇷',this)">
+
+                    <div class="option-icon">🇰🇷</div>
+
+                    <div class="option-title">
+                        Korean
+                    </div>
+
+                    <div class="option-description">
+                        Learn Korean through real conversations.
+                    </div>
+
+                </div>
+
+
+                <div class="option"
+                     onclick="selectLanguage('Japanese','🇯🇵',this)">
+
+                    <div class="option-icon">🇯🇵</div>
+
+                    <div class="option-title">
+                        Japanese
+                    </div>
+
+                    <div class="option-description">
+                        Practice useful Japanese speaking.
+                    </div>
+
+                </div>
+
+
+                <div class="option"
+                     onclick="selectLanguage('French','🇫🇷',this)">
+
+                    <div class="option-icon">🇫🇷</div>
+
+                    <div class="option-title">
+                        French
+                    </div>
+
+                    <div class="option-description">
+                        Build confidence speaking French.
+                    </div>
+
+                </div>
+
+
+                <div class="option"
+                     onclick="selectLanguage('German','🇩🇪',this)">
+
+                    <div class="option-icon">🇩🇪</div>
+
+                    <div class="option-title">
+                        German
+                    </div>
+
+                    <div class="option-description">
+                        Practice real German conversations.
+                    </div>
+
+                </div>
+
+
+                <div class="option"
+                     onclick="selectLanguage('Arabic','🇸🇦',this)">
+
+                    <div class="option-icon">🇸🇦</div>
+
+                    <div class="option-title">
+                        Arabic
+                    </div>
+
+                    <div class="option-description">
+                        Practice everyday Arabic speaking.
+                    </div>
+
+                </div>
+
+
+                <div class="option"
+                     onclick="selectLanguage('Italian','🇮🇹',this)">
+
+                    <div class="option-icon">🇮🇹</div>
+
+                    <div class="option-title">
+                        Italian
+                    </div>
+
+                    <div class="option-description">
+                        Speak Italian through conversation.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+<!-- ================= STEP 2 ================= -->
+
+<div class="step" id="step2">
+
+    <div class="step-label">
+        STEP 2 OF 4
+    </div>
+
+    <h2>
+        What's your native language? 🗣️
+    </h2>
+
+    <p class="step-description">
+        We'll use this naturally when you need help
+        during a conversation.
+    </p>
+
+    <div class="options">
+
+        <div class="option"
+             onclick="selectNative('English','🇬🇧',this)">
+
+            <div class="option-icon">🇬🇧</div>
+
+            <div class="option-title">
+                English
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('Hindi','🇮🇳',this)">
+
+            <div class="option-icon">🇮🇳</div>
+
+            <div class="option-title">
+                Hindi
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('Kannada','🇮🇳',this)">
+
+            <div class="option-icon">🇮🇳</div>
+
+            <div class="option-title">
+                Kannada
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('Spanish','🇪🇸',this)">
+
+            <div class="option-icon">🇪🇸</div>
+
+            <div class="option-title">
+                Spanish
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('French','🇫🇷',this)">
+
+            <div class="option-icon">🇫🇷</div>
+
+            <div class="option-title">
+                French
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('German','🇩🇪',this)">
+
+            <div class="option-icon">🇩🇪</div>
+
+            <div class="option-title">
+                German
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('Italian','🇮🇹',this)">
+
+            <div class="option-icon">🇮🇹</div>
+
+            <div class="option-title">
+                Italian
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('Portuguese','🇵🇹',this)">
+
+            <div class="option-icon">🇵🇹</div>
+
+            <div class="option-title">
+                Portuguese
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('Korean','🇰🇷',this)">
+
+            <div class="option-icon">🇰🇷</div>
+
+            <div class="option-title">
+                Korean
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('Japanese','🇯🇵',this)">
+
+            <div class="option-icon">🇯🇵</div>
+
+            <div class="option-title">
+                Japanese
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('Chinese','🇨🇳',this)">
+
+            <div class="option-icon">🇨🇳</div>
+
+            <div class="option-title">
+                Chinese
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="selectNative('Arabic','🇸🇦',this)">
+
+            <div class="option-icon">🇸🇦</div>
+
+            <div class="option-title">
+                Arabic
+            </div>
+
+        </div>
+
+
+        <div class="option"
+             onclick="showOtherLanguage(this)">
+
+            <div class="option-icon">🌍</div>
+
+            <div class="option-title">
+                Other
+            </div>
+
+            <div class="option-description">
+                Can't find your language? Search here.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- OTHER LANGUAGE SEARCH -->
+
+    <div class="native-search" id="nativeSearch">
+
+        <p>
+            Search for your native language
+        </p>
+
+        <input
+            type="text"
+            id="nativeSearchInput"
+            placeholder="Type your language..."
+            oninput="searchNativeLanguage()">
+
+        <div
+            class="native-search-result"
+            id="nativeSearchResult"
+            onclick="selectOtherLanguage()">
+        </div>
+
+    </div>
+
+</div>
+
+        <!-- ================= STEP 3 ================= -->
+
+        <div class="step" id="step3">
+
+            <div class="step-label">
+                STEP 3 OF 4
+            </div>
+
+            <h2>
+                What's your current level? 📊
+            </h2>
+
+            <p class="step-description">
+                Choose the level that feels closest to you.
+            </p>
+
+
+            <div class="level-options">
+
+                <div class="level-card"
+                     onclick="selectLevel('Beginner',this)">
+
+                    <h3>
+                        🌱 Beginner
+                    </h3>
+
+                    <p>
+                        I know some basics and want to start
+                        speaking simple sentences.
+                    </p>
+
+                </div>
+
+
+                <div class="level-card"
+                     onclick="selectLevel('Intermediate',this)">
+
+                    <h3>
+                        🌿 Intermediate
+                    </h3>
+
+                    <p>
+                        I can communicate but want to become
+                        more fluent and confident.
+                    </p>
+
+                </div>
+
+
+                <div class="level-card"
+                     onclick="selectLevel('Advanced',this)">
+
+                    <h3>
+                        🌳 Advanced
+                    </h3>
+
+                    <p>
+                        I can communicate well and want to
+                        improve fluency and accuracy.
+                    </p>
+
+                </div>
+
+
+                <div class="level-card"
+                     onclick="selectLevel('I don\'t know my level',this)">
+
+                    <h3>
+                        🤔 I don't know my level
+                    </h3>
+
+                    <p>
+                        I'm not sure. CallAmigo can help
+                        me figure it out.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SCORE -->
+
+            <div class="score-section">
+
+                <h3>
+                    Have a language test score?
+                </h3>
+
+                <p>
+                    Optional — this helps us understand your level better.
+                </p>
+
+
+                <div class="score-row">
+
+                    <select id="scoreType">
+
+                        <option value="">
+                            Select test
+                        </option>
+
+                        <option value="Duolingo">
+                            Duolingo English Test
+                        </option>
+
+                        <option value="CEFR">
+                            CEFR
+                        </option>
+
+                        <option value="TOEFL">
+                            TOEFL
+                        </option>
+
+                        <option value="IELTS">
+                            IELTS
+                        </option>
+
+                    </select>
+
+
+                    <input
+                        type="text"
+                        id="scoreValue"
+                        placeholder="Enter score / level">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= STEP 4 ================= -->
+
+        <div class="step" id="step4">
+
+            <div class="step-label">
+                STEP 4 OF 4
+            </div>
+
+            <h2>
+                How do you want to practice? 💬
+            </h2>
+
+            <p class="step-description">
+                You can always change this later.
+            </p>
+
+
+            <div class="practice-options">
+
+                <div class="practice-card"
+                     onclick="selectPractice('call',this)">
+
+                    <div class="practice-icon">
+                        ☎️
+                    </div>
+
+                    <h3>
+                        Start a conversation
+                    </h3>
+
+                    <p>
+                        Talk naturally with your AI language
+                        friend without choosing a situation.
+                    </p>
+
+                </div>
+
+
+                <div class="practice-card"
+                     onclick="selectPractice('situation',this)">
+
+                    <div class="practice-icon">
+                        💬
+                    </div>
+
+                    <h3>
+                        Choose a situation
+                    </h3>
+
+                    <p>
+                        Practice conversations such as cafés,
+                        airports, college, shopping and more.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= BUTTONS ================= -->
+
+        <div class="buttons">
+
+            <button
+                class="prev-btn"
+                id="prevBtn"
+                onclick="previousStep()"
+                style="display:none;">
+
+                ← Previous
+
+            </button>
+
+
+            <button
+                class="next-btn"
+                id="nextBtn"
+                onclick="nextStep()"
+                disabled>
+
+                Continue →
+
+            </button>
+
+        </div>
+
+
+        <div id="message"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let currentStep = 1;
+
+let selectedLanguage = null;
+let selectedNative = null;
+let selectedLevel = null;
+let selectedPractice = null;
+
+
+/* ================= LANGUAGE ================= */
+
+function selectLanguage(name, flag, element){
+
+    selectedLanguage = {
+        name:name,
+        flag:flag
+    };
+
+    document.querySelectorAll("#step1 .option")
+        .forEach(option => {
+            option.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
+
+    document.getElementById("nextBtn").disabled = false;
+
+    clearMessage();
+}
+
+
+/* ================= NATIVE LANGUAGE ================= */
+function selectNative(name, flag, element){
+
+    selectedNative = {
+        name:name,
+        flag:flag
+    };
+
+    document.querySelectorAll("#step2 .option")
+        .forEach(option => {
+            option.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
+
+    document.getElementById("nativeSearch")
+        .classList.remove("active");
+
+    document.getElementById("nextBtn").disabled = false;
+
+    clearMessage();
+}
+function showOtherLanguage(element){
+
+    document.querySelectorAll("#step2 .option")
+        .forEach(option => {
+            option.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
+
+    document.getElementById("nativeSearch")
+        .classList.add("active");
+
+    document.getElementById("nativeSearchInput")
+        .focus();
+
+    document.getElementById("nextBtn").disabled = true;
+
+    selectedNative = null;
+
+    clearMessage();
+}
+
+
+function searchNativeLanguage(){
+
+    const input =
+        document.getElementById("nativeSearchInput");
+
+    const result =
+        document.getElementById("nativeSearchResult");
+
+    const language =
+        input.value.trim();
+
+    if(!language){
+
+        result.style.display = "none";
+        selectedNative = null;
+        document.getElementById("nextBtn").disabled = true;
+
+        return;
+    }
+
+    result.textContent =
+        "🌐 " + language;
+
+    result.style.display = "block";
+}
+
+
+function selectOtherLanguage(){
+
+    const language =
+        document.getElementById("nativeSearchInput")
+            .value.trim();
+
+    if(!language){
+        return;
+    }
+
+    selectedNative = {
+        name:language,
+        flag:"🌐"
+    };
+
+    document.getElementById("nativeSearchResult")
+        .textContent =
+        "✓ " + language + " selected";
+
+    document.getElementById("nextBtn").disabled = false;
+
+    clearMessage();
+}
+
+/* ================= LEVEL ================= */
+
+function selectLevel(level, element){
+
+    selectedLevel = {
+        level:level
+    };
+
+    document.querySelectorAll("#step3 .level-card")
+        .forEach(card => {
+            card.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
+
+    document.getElementById("nextBtn").disabled = false;
+
+    clearMessage();
+}
+
+
+/* ================= PRACTICE ================= */
+
+function selectPractice(type, element){
+
+    selectedPractice = type;
+
+    document.querySelectorAll(".practice-card")
+        .forEach(card => {
+            card.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
+
+    document.getElementById("nextBtn").disabled = false;
+
+    clearMessage();
+
+    if(type === "call"){
+
+        document.getElementById("nextBtn").textContent =
+            "Start conversation →";
+
+    }
+    else{
+
+        document.getElementById("nextBtn").textContent =
+            "Choose situation →";
+
+    }
+
+}
+
+
+/* ================= NEXT ================= */
+
+async function nextStep(){
+
+    clearMessage();
+
+    if(currentStep === 1 && !selectedLanguage){
+
+        showMessage("Please choose a language first.");
+        return;
+
+    }
+
+
+    if(currentStep === 2 && !selectedNative){
+
+        showMessage("Please choose your native language.");
+        return;
+
+    }
+
+
+    if(currentStep === 3 && !selectedLevel){
+
+        showMessage("Please choose your level.");
+        return;
+
+    }
+
+
+    if(currentStep === 4 && !selectedPractice){
+
+        showMessage("Please choose how you want to practice.");
+        return;
+
+    }
+
+
+    /* STEP 1 → STEP 2 → STEP 3 → STEP 4 */
+
+    if(currentStep < 4){
+
+        currentStep++;
+
+        updateStep();
+
+        return;
+
+    }
+
+
+    /* ================= SAVE DATA ================= */
+
+    const scoreType =
+        document.getElementById("scoreType").value;
+
+    const scoreValue =
+        document.getElementById("scoreValue").value;
+
+
+    /* Save locally */
+
+    localStorage.setItem(
+        "selectedLanguage",
+        JSON.stringify(selectedLanguage)
+    );
+
+
+    localStorage.setItem(
+        "nativeLanguage",
+        JSON.stringify(selectedNative)
+    );
+
+
+    localStorage.setItem(
+        "languageLevel",
+        JSON.stringify(selectedLevel)
+    );
+
+
+    localStorage.setItem(
+        "languageScore",
+        JSON.stringify({
+            type:scoreType,
+            value:scoreValue
+        })
+    );
+
+
+    localStorage.setItem(
+        "practiceMode",
+        selectedPractice
+    );
+
+
+    /* ================= SAVE TO BACKEND ================= */
+
+    const token =
+        localStorage.getItem("token");
+
+    if(!token){
+
+        showMessage(
+            "Your session has expired. Please log in again."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/auth/setup",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":"application/json",
+                        "Authorization":"Bearer " + token
+                    },
+
+                    body:JSON.stringify({
+
+                        language:selectedLanguage.name,
+
+                        nativeLanguage:selectedNative.name,
+
+                        level:selectedLevel.level,
+
+                        languageScoreType:scoreType,
+
+                        languageScore:scoreValue,
+
+                        practiceMode:selectedPractice
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            showMessage(
+                data.message ||
+                "Could not save your setup."
+            );
+
+            return;
+
+        }
+
+
+        /* ================= UPDATE USER DATA ================= */
+
+        const user =
+            JSON.parse(
+                localStorage.getItem("user")
+            ) || {};
+
+
+        user.language =
+            selectedLanguage.name;
+
+        user.nativeLanguage =
+            selectedNative.name;
+
+        user.level =
+            selectedLevel.level;
+
+        user.languageScoreType =
+            scoreType;
+
+        user.languageScore =
+            scoreValue;
+
+        user.practiceMode =
+            selectedPractice;
+
+        user.setupCompleted =
+            true;
+
+
+        localStorage.setItem(
+            "user",
+            JSON.stringify(user)
+        );
+
+
+        /* ================= FINAL DESTINATION ================= */
+
+        if(selectedPractice === "call"){
+
+            localStorage.setItem(
+                "conversationMode",
+                "normal"
+            );
+
+            localStorage.removeItem(
+                "selectedScenario"
+            );
+
+            window.location.href =
+                "call.html";
+
+        }
+        else{
+
+            localStorage.setItem(
+                "conversationMode",
+                "situation"
+            );
+
+            window.location.href =
+                "situation.html";
+
+        }
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "Could not connect to CallAmigo server."
+        );
+
+    }
+
+}
+
+
+/* ================= PREVIOUS ================= */
+
+function previousStep(){
+
+    if(currentStep > 1){
+
+        currentStep--;
+
+        updateStep();
+
+    }
+
+}
+
+
+/* ================= UPDATE ================= */
+
+function updateStep(){
+
+    document.querySelectorAll(".step")
+        .forEach(step => {
+            step.classList.remove("active");
+        });
+
+
+    document.getElementById(
+        "step" + currentStep
+    ).classList.add("active");
+
+
+    /* PROGRESS */
+
+    const progress =
+        ((currentStep - 1) / 3) * 100;
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        progress + "%";
+
+
+    for(let i = 1; i <= 4; i++){
+
+        const item =
+            document.getElementById("progress" + i);
+
+        item.classList.remove(
+            "active",
+            "completed"
+        );
+
+        if(i < currentStep){
+
+            item.classList.add("completed");
+
+        }
+
+        if(i === currentStep){
+
+            item.classList.add("active");
+
+        }
+
+    }
+
+
+    /* BUTTON */
+
+    const prevBtn =
+        document.getElementById("prevBtn");
+
+    const nextBtn =
+        document.getElementById("nextBtn");
+
+
+    prevBtn.style.display =
+        currentStep === 1 ? "none" : "block";
+
+
+    if(currentStep === 4){
+
+        nextBtn.disabled =
+            !selectedPractice;
+
+        if(selectedPractice === "call"){
+
+            nextBtn.textContent =
+                "Start conversation →";
+
+        }
+        else{
+
+            nextBtn.textContent =
+                "Choose situation →";
+
+        }
+
+    }
+    else{
+
+        nextBtn.disabled = false;
+
+        if(currentStep === 1 &&
+           !selectedLanguage){
+
+            nextBtn.disabled = true;
+
+        }
+
+        if(currentStep === 2 &&
+           !selectedNative){
+
+            nextBtn.disabled = true;
+
+        }
+
+        if(currentStep === 3 &&
+           !selectedLevel){
+
+            nextBtn.disabled = true;
+
+        }
+
+        nextBtn.textContent =
+            "Continue →";
+
+    }
+
+}
+
+
+/* ================= MESSAGE ================= */
+
+function showMessage(text){
+
+    document.getElementById("message").textContent =
+        text;
+
+}
+
+
+function clearMessage(){
+
+    document.getElementById("message").textContent =
+        "";
+
+}
+
+
+/* ================= BACK ================= */
+
+function goBack(){
+
+    if(currentStep > 1){
+
+        previousStep();
+
+    }
+    else{
+
+        window.location.href =
+            "dashboard.html";
+
+    }
+
+}
+
+
+/* INITIALIZE */
+
+updateStep();
+
+</script>
+
+</body>
+</html>

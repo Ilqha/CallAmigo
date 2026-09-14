@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CallAmigo — Conversation</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#e4eee5;
+    color:#17231d;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    height:75px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#e4eee5;
+    border-bottom:1px solid #cbd9cd;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:21px;
+    font-weight:700;
+    color:#173c2c;
+}
+
+.callamigo-logo{
+    width:170px;
+    height:auto;
+    display:block;
+    object-fit:contain;
+}
+.back-btn{
+    border:1px solid #cbd8ce;
+    background:#fffdf8;
+    color:#294438;
+    padding:10px 17px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:transform .2s ease,
+                box-shadow .2s ease,
+                border-color .2s ease;
+}
+
+.back-btn:hover{
+    border-color:#1d6244;
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(30,70,45,.08);
+}
+
+.back-btn:active{
+    transform:translateY(0) scale(.98);
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    max-width:700px;
+    margin:55px auto;
+    padding:0 25px;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:36px;
+    margin-bottom:10px;
+    color:#173c2c;
+    letter-spacing:-.5px;
+}
+
+.header p{
+    color:#68756d;
+    line-height:1.6;
+}
+
+/* ================= INFO BADGES ================= */
+
+.info{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+.badge{
+    background:#d8e8da;
+    color:#276346;
+    border:1px solid #c4d8c7;
+    padding:9px 15px;
+    border-radius:25px;
+    font-size:12px;
+    font-weight:600;
+    transition:.2s ease;
+}
+
+.badge:hover{
+    transform:translateY(-2px);
+    border-color:#9dbba7;
+    box-shadow:0 6px 15px rgba(30,70,45,.06);
+}
+
+/* ================= CALL CARD ================= */
+
+.call-card{
+    background:#fffdf8;
+    border:1px solid #d4dfd5;
+    border-radius:25px;
+    padding:42px 30px;
+    text-align:center;
+    box-shadow:0 15px 45px rgba(30,70,45,.08);
+    transition:transform .2s ease,
+                box-shadow .2s ease,
+                border-color .2s ease;
+}
+
+.call-card:hover{
+    transform:translateY(-3px);
+    border-color:#b8cdbd;
+    box-shadow:0 18px 45px rgba(30,70,45,.11);
+}
+
+.avatar{
+    width:105px;
+    height:105px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:#e4eee5;
+    border:1px solid #cbd9cd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    color:#1d6244;
+    transition:transform .2s ease,
+                box-shadow .2s ease;
+}
+
+.call-card:hover .avatar{
+    transform:scale(1.04);
+    box-shadow:0 8px 20px rgba(29,98,68,.08);
+}
+
+.call-card h2{
+    margin:0 0 7px;
+    color:#294438;
+}
+
+.status{
+    color:#7b877f;
+    font-size:13px;
+    margin-bottom:30px;
+}
+
+.status-dot{
+    display:inline-block;
+    width:8px;
+    height:8px;
+    background:#4ca66f;
+    border-radius:50%;
+    margin-right:5px;
+}
+
+/* ================= MESSAGE ================= */
+
+.message{
+    min-height:65px;
+    padding:18px;
+    border-radius:15px;
+    background:#edf5ee;
+    border:1px solid #d9e6db;
+    color:#465148;
+    text-align:left;
+    line-height:1.6;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+/* ================= CALL BUTTON ================= */
+
+.call-button{
+    width:76px;
+    height:76px;
+    border:none;
+    border-radius:50%;
+    background:#1d6244;
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+    transition:transform .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+    box-shadow:0 8px 20px rgba(29,98,68,.18);
+}
+
+.call-button:hover{
+    background:#174d36;
+    transform:scale(1.07);
+    box-shadow:0 12px 25px rgba(29,98,68,.22);
+}
+
+.call-button:active{
+    transform:scale(.96);
+}
+
+.hint{
+    margin-top:18px;
+    color:#858d86;
+    font-size:11px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:600px){
+
+    nav{
+        padding:0 5%;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .back-btn{
+        padding:9px 13px;
+        font-size:12px;
+    }
+
+    .container{
+        margin:40px auto;
+        padding:0 18px;
+    }
+
+    .header h1{
+        font-size:30px;
+    }
+
+    .call-card{
+        padding:32px 20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+    <img
+        src="callamigo-logo.png"
+        alt="CallAmigo"
+        class="callamigo-logo">
+
+</div>
+
+    <button class="back-btn" onclick="goBack()">
+        ← Back
+    </button>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>
+            Ready to talk? ☎
+        </h1>
+
+        <p>
+            Your AI language friend is ready for a conversation.
+        </p>
+
+    </div>
+
+
+    <div class="info">
+
+        <div class="badge" id="languageBadge">
+            Language
+        </div>
+
+        <div class="badge" id="levelBadge">
+            Level
+        </div>
+
+        <div class="badge" id="scenarioBadge">
+            Conversation
+        </div>
+
+    </div>
+
+
+    <div class="call-card">
+
+        <div class="avatar">
+            ☎
+        </div>
+
+        <h2>
+            CallAmigo
+        </h2>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            Ready to talk
+        </div>
+
+
+        <div class="message" id="message">
+
+            Tap the button below to start your conversation.
+
+        </div>
+
+
+        <button class="call-button"
+                onclick="startCall()">
+
+            ☎
+
+        </button>
+
+
+        <div class="hint">
+
+           Take a breath and start speaking.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* ================= GET SAVED DATA ================= */
+
+const language =
+    JSON.parse(
+        localStorage.getItem("selectedLanguage")
+    );
+
+const level =
+    JSON.parse(
+        localStorage.getItem("languageLevel")
+    );
+
+const scenario =
+    JSON.parse(
+        localStorage.getItem("selectedScenario")
+    );
+
+
+/* ================= SHOW LANGUAGE ================= */
+
+if(language){
+
+    document.getElementById("languageBadge").textContent =
+        language.flag + " " + language.name;
+
+}
+
+
+/* ================= SHOW LEVEL ================= */
+
+if(level){
+
+    document.getElementById("levelBadge").textContent =
+        level.level;
+
+}
+
+
+/* ================= SHOW SCENARIO ================= */
+
+/*
+   A situation should ONLY appear when the user
+   intentionally selected one.
+
+   Random / normal conversation:
+   no situation is displayed.
+*/
+
+const scenarioBadge =
+    document.getElementById("scenarioBadge");
+
+const conversationMode =
+    localStorage.getItem("conversationMode");
+
+
+if(
+    scenario &&
+    conversationMode === "situation"
+){
+
+    scenarioBadge.textContent =
+        scenario.icon + " " + scenario.name;
+
+}else{
+
+    scenarioBadge.style.display = "none";
+
+}
+
+
+/* ================= START CALL ================= */
+
+async function startCall(){
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent =
+        "Connecting to CallAmigo...";
+
+    try{
+
+        const user =
+            JSON.parse(
+                localStorage.getItem("user")
+            );
+
+        if(!user){
+
+            message.textContent =
+                "Please log in again before starting a call.";
+
+            return;
+        }
+
+        if(!user.phone){
+
+            message.textContent =
+                "No phone number is saved to your account.";
+
+            return;
+        }
+
+        if(!language){
+
+            message.textContent =
+                "Please select a learning language first.";
+
+            return;
+        }
+
+        if(!level){
+
+            message.textContent =
+                "Please select your language level first.";
+
+            return;
+        }
+
+        const learningLanguage =
+            language.name;
+
+        const nativeLanguage =
+            user.nativeLanguage || "English";
+
+        const proficiencyLevel =
+            level.level;
+
+
+        let situationName = "";
+
+        if(
+            scenario &&
+            conversationMode === "situation"
+        ){
+
+            situationName =
+                scenario.name;
+        }
+
+
+        const task = `
+
+You are CallAmigo, an AI language practice partner.
+
+Start the call by naturally saying:
+
+"Hello, this is CallAmigo. I'm here to help you practice ${learningLanguage}."
+
+The learner is practicing ${learningLanguage}.
+
+Their native language is ${nativeLanguage}.
+
+Their proficiency level is ${proficiencyLevel}.
+
+Have a natural and friendly conversation.
+
+Help the learner speak ${learningLanguage}
+at a level appropriate for them.
+
+Do not make the conversation feel like a classroom lesson.
+
+Ask questions, listen carefully, and respond naturally.
+
+Encourage the learner to speak.
+
+If the learner asks for the meaning of a word or phrase,
+briefly explain it using their native language when helpful,
+then continue the conversation in ${learningLanguage}.
+
+Gently correct important mistakes when appropriate.
+
+Do not interrupt unnecessarily.
+
+Adapt the conversation based on what the learner says.
+
+The goal is real-life conversation practice.
+`;
+
+
+        if(situationName){
+
+            task += `
+
+The learner selected this situation:
+
+${situationName}
+
+Keep the conversation naturally focused on this situation.
+Do not use a rigid scripted dialogue.
+React naturally to the learner's responses.
+`;
+
+        }else{
+
+            task += `
+
+No specific situation was selected.
+
+Have a natural everyday conversation in ${learningLanguage}.
+`;
+
+        }
+
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/calle/start",
+                {
+                    method:"POST",
+
+                   headers:{
+    "Content-Type":"application/json",
+    "Authorization":"Bearer " + localStorage.getItem("token")
+},
+                    body:JSON.stringify({
+
+                        task:task,
+
+                        phone:user.phone,
+
+                        language:learningLanguage,
+
+                        nativeLanguage:nativeLanguage,
+
+                        level:proficiencyLevel,
+
+                        situation:situationName
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            console.error(
+                "CallAmigo error:",
+                data
+            );
+
+            message.textContent =
+                data.message ||
+                "Could not start the call.";
+
+            return;
+        }
+
+
+        message.textContent =
+            "CallAmigo is calling you now. Please answer your phone.";
+
+        console.log(
+            "CALL-E call started:",
+            data
+        );
+         checkCallStatus(data.callId);
+
+    }catch(error){
+
+        console.error(
+            "CallAmigo connection error:",
+            error
+        );
+
+        message.textContent =
+            "Could not connect to CallAmigo. Please try again.";
+    }
+}
+async function checkCallStatus(callId){
+
+    try{
+
+        const token =
+            localStorage.getItem("token");
+
+        if(!token){
+            return;
+        }
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/calle/status/" +
+                encodeURIComponent(callId),
+                {
+                    method:"GET",
+
+                    headers:{
+                        "Authorization":
+                            "Bearer " + token
+                    }
+                }
+            );
+
+        const data =
+            await response.json();
+
+        console.log(
+            "CALL-E status:",
+            data
+        );
+
+
+        if(data.status === "completed"){
+
+            document.getElementById("message").textContent =
+                "Conversation completed! Your practice has been saved.";
+
+            return;
+        }
+
+
+        if(
+            data.status === "failed" ||
+            data.status === "canceled"
+        ){
+
+            document.getElementById("message").textContent =
+                "The conversation could not be completed.";
+
+            return;
+        }
+
+
+        setTimeout(
+            () => checkCallStatus(callId),
+            15000
+        );
+
+    }catch(error){
+
+        console.error(
+            "Status check error:",
+            error
+        );
+
+    }
+
+}
+/* ================= BACK ================= */
+
+function goBack(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Practice Mode - CallAmigo</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#e4eee5;
+    color:#17231d;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    height:75px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#e4eee5;
+    border-bottom:1px solid #cbd9cd;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:21px;
+    font-weight:700;
+    color:#173c2c;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    width:170px;
+    height:auto;
+    display:block;
+}
+
+.back-btn{
+    border:1px solid #cbd8ce;
+    background:#fffdf8;
+    color:#294438;
+    padding:10px 17px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:transform .2s ease,
+                box-shadow .2s ease,
+                border-color .2s ease;
+}
+
+.back-btn:hover{
+    border-color:#1d6244;
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(30,70,45,.08);
+}
+
+.back-btn:active{
+    transform:translateY(0) scale(.98);
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    max-width:950px;
+    margin:60px auto;
+    padding:0 25px;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.heading h1{
+    font-size:42px;
+    margin-bottom:12px;
+    color:#173c2c;
+    letter-spacing:-.6px;
+}
+
+.heading p{
+    color:#68756d;
+    line-height:1.6;
+}
+
+/* ================= LEVEL ================= */
+
+.level-info{
+    width:fit-content;
+    margin:0 auto 35px;
+    padding:9px 17px;
+    background:#d8e8da;
+    color:#276346;
+    border:1px solid #c4d8c7;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+    transition:.2s ease;
+}
+
+.level-info:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(30,70,45,.06);
+}
+
+/* ================= CHOICES ================= */
+
+.choices{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.choice{
+    background:#fffdf8;
+    border:1px solid #d4dfd5;
+    border-radius:22px;
+    padding:35px;
+    min-height:250px;
+    cursor:pointer;
+    transition:transform .2s ease,
+                box-shadow .2s ease,
+                border-color .2s ease;
+    box-shadow:0 10px 30px rgba(30,70,45,.05);
+}
+
+.choice:hover{
+    transform:translateY(-6px);
+    border-color:#9dbba7;
+    box-shadow:0 15px 35px rgba(30,70,45,.11);
+}
+
+.choice:active{
+    transform:translateY(-1px) scale(.99);
+}
+
+.choice-icon{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    background:#e4eee5;
+    border:1px solid #d1dfd3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    margin-bottom:22px;
+    transition:transform .2s ease,
+                box-shadow .2s ease;
+}
+
+.choice:hover .choice-icon{
+    transform:scale(1.08);
+    box-shadow:0 6px 15px rgba(30,70,45,.07);
+}
+
+.choice h2{
+    margin:0 0 10px;
+    font-size:22px;
+    color:#294438;
+}
+
+.choice p{
+    color:#68756d;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.choice-button{
+    display:inline-block;
+    margin-top:15px;
+    background:#1d6244;
+    color:white;
+    padding:12px 18px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:600;
+    transition:transform .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+}
+
+.choice:hover .choice-button{
+    background:#174d36;
+    transform:translateY(-1px);
+    box-shadow:0 6px 15px rgba(29,98,68,.14);
+}
+
+/* ================= NOTE ================= */
+
+.note{
+    text-align:center;
+    margin-top:30px;
+    color:#7b877f;
+    font-size:12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:700px){
+
+    .container{
+        margin:45px auto;
+        padding:0 18px;
+    }
+
+    .choices{
+        grid-template-columns:1fr;
+    }
+
+    .heading h1{
+        font-size:34px;
+    }
+
+    .choice{
+        padding:27px;
+        min-height:auto;
+    }
+
+}
+
+@media(max-width:450px){
+
+    nav{
+        padding:0 5%;
+    }
+
+    .logo{
+        font-size:120px;
+    }
+
+    .back-btn{
+        padding:9px 13px;
+        font-size:12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+    <img src="callamigo-logo.png" alt="CallAmigo">
+</div>
+
+
+    <button class="back-btn"
+            onclick="goBack()">
+
+        ← Back
+
+    </button>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+
+    <div class="heading">
+
+        <h1>
+            How do you want to practice? 💬
+        </h1>
+
+        <p>
+            Choose how you'd like to start your conversation
+            with CallAmigo.
+        </p>
+
+    </div>
+
+
+    <div class="level-info"
+         id="levelInfo">
+
+        Your level
+
+    </div>
+
+
+    <!-- TWO OPTIONS -->
+
+    <div class="choices">
+
+
+        <!-- NORMAL CALL -->
+
+        <div class="choice"
+             onclick="startNormalCall()">
+
+            <div class="choice-icon">
+                ☎
+            </div>
+
+            <h2>
+                Just start a call
+            </h2>
+
+            <p>
+                Have a natural conversation with
+                CallAmigo. Talk about anything you want
+                and let your AI language friend guide you.
+            </p>
+
+            <div class="choice-button">
+                Start call →
+            </div>
+
+        </div>
+
+
+        <!-- SITUATIONS -->
+
+        <div class="choice"
+             onclick="chooseSituation()">
+
+            <div class="choice-icon">
+                🎯
+            </div>
+
+            <h2>
+                Choose a situation
+            </h2>
+
+            <p>
+                Practice a specific real-life situation
+                such as a café, airport, college,
+                shopping or interview.
+            </p>
+
+            <div class="choice-button">
+                Choose situation →
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="note">
+
+        💡 Beginners can start with a normal conversation.
+        CallAmigo will adjust the conversation to your level.
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+/* GET SAVED LEVEL */
+
+const savedLevel =
+    JSON.parse(
+        localStorage.getItem("languageLevel")
+    );
+
+const selectedLanguage =
+    JSON.parse(
+        localStorage.getItem("selectedLanguage")
+    );
+
+
+if(savedLevel){
+
+    document.getElementById(
+        "levelInfo"
+    ).textContent =
+        "Level: " + savedLevel.level;
+
+}
+
+
+/* NORMAL CALL */
+
+function startNormalCall(){
+
+    localStorage.setItem(
+        "practiceType",
+        "normal"
+    );
+
+    window.location.href =
+        "call.html";
+
+}
+
+
+/* SITUATION */
+
+function chooseSituation(){
+
+    localStorage.setItem(
+        "practiceType",
+        "situation"
+    );
+
+    window.location.href =
+        "situation.html";
+
+}
+
+
+/* BACK */
+
+function goBack(){
+
+    window.location.href =
+        "level.html";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Choose Situation - CallAmigo</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#e4eee5;
+    color:#17231d;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    height:75px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#e4eee5;
+    border-bottom:1px solid #cbd9cd;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    width:170px;
+    height:auto;
+    display:block;
+}
+
+.back-btn{
+    border:1px solid #cbd8ce;
+    background:#fffdf8;
+    color:#294438;
+    padding:10px 17px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.back-btn:hover{
+    border-color:#1d6244;
+    transform:translateY(-1px);
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    max-width:950px;
+    margin:60px auto;
+    padding:0 25px;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.heading h1{
+    font-size:40px;
+    margin-bottom:10px;
+    color:#173c2c;
+    letter-spacing:-.6px;
+}
+
+.heading p{
+    color:#68756d;
+    line-height:1.6;
+}
+
+/* ================= SELECTED LANGUAGE ================= */
+
+.selected-language{
+    margin:0 auto 30px;
+    width:fit-content;
+    padding:10px 18px;
+    background:#d8e8da;
+    color:#276346;
+    border:1px solid #c4d8c7;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* ================= SCENARIOS ================= */
+
+.scenarios{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.scenario-card{
+    background:#fffdf8;
+    border:1px solid #d4dfd5;
+    border-radius:18px;
+    padding:23px;
+    cursor:pointer;
+    transition:.2s;
+    box-shadow:0 8px 25px rgba(30,70,45,.05);
+}
+
+.scenario-card:hover{
+    transform:translateY(-4px);
+    border-color:#7fa58c;
+    box-shadow:0 12px 30px rgba(30,70,45,.09);
+}
+
+.scenario-card.selected{
+    border:2px solid #1d6244;
+    background:#edf5ee;
+    box-shadow:0 10px 25px rgba(29,98,68,.08);
+}
+
+.icon{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+.scenario-name{
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:7px;
+    color:#294438;
+}
+
+.scenario-description{
+    color:#7b877f;
+    font-size:11px;
+    line-height:1.5;
+}
+
+/* ================= BUTTON ================= */
+
+.start-btn{
+    display:block;
+    margin:35px auto 0;
+    border:none;
+    background:#1d6244;
+    color:white;
+    padding:15px 27px;
+    border-radius:11px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.start-btn:hover:not(:disabled){
+    background:#174d36;
+    transform:translateY(-1px);
+}
+
+.start-btn:disabled{
+    background:#aebbb1;
+    cursor:not-allowed;
+}
+
+#message{
+    text-align:center;
+    margin-top:15px;
+    color:#b25b5b;
+    min-height:18px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:750px){
+
+    .container{
+        margin:45px auto;
+        padding:0 18px;
+    }
+
+    .scenarios{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .heading h1{
+        font-size:32px;
+    }
+
+}
+
+@media(max-width:450px){
+
+    nav{
+        padding:0 5%;
+    }
+
+.logo img{
+    width:120px;
+}
+    .back-btn{
+        padding:9px 13px;
+        font-size:12px;
+    }
+
+    .container{
+        margin:35px auto;
+        padding:0 16px;
+    }
+
+    .scenarios{
+        grid-template-columns:1fr;
+    }
+
+    .scenario-card{
+        padding:20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+ <div class="logo">
+    <img src="callamigo-logo.png" alt="CallAmigo">
+</div>
+    <button class="back-btn" onclick="goBack()">
+        ← Language
+    </button>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="heading">
+
+        <h1>Where do you want to practice? 💬</h1>
+
+        <p>
+            Choose a real-life situation for your AI conversation.
+        </p>
+
+    </div>
+
+
+    <div class="selected-language" id="selectedLanguage">
+        Loading language...
+    </div>
+
+
+    <div class="scenarios">
+
+        <div class="scenario-card"
+             onclick="selectScenario('Café', '☕', 'Practice ordering food and drinks.', this)">
+
+            <div class="icon">☕</div>
+
+            <div class="scenario-name">
+                Café
+            </div>
+
+            <div class="scenario-description">
+                Order food and drinks naturally.
+            </div>
+
+        </div>
+
+
+        <div class="scenario-card"
+             onclick="selectScenario('Airport', '✈️', 'Practice useful travel conversations.', this)">
+
+            <div class="icon">✈️</div>
+
+            <div class="scenario-name">
+                Airport
+            </div>
+
+            <div class="scenario-description">
+                Practice check-in and travel conversations.
+            </div>
+
+        </div>
+
+
+        <div class="scenario-card"
+             onclick="selectScenario('Hotel', '🏨', 'Practice checking in and making requests.', this)">
+
+            <div class="icon">🏨</div>
+
+            <div class="scenario-name">
+                Hotel
+            </div>
+
+            <div class="scenario-description">
+                Check in and handle requests.
+            </div>
+
+        </div>
+
+
+        <div class="scenario-card"
+             onclick="selectScenario('Directions', '🚇', 'Practice asking for and understanding directions.', this)">
+
+            <div class="icon">🚇</div>
+
+            <div class="scenario-name">
+                Directions
+            </div>
+
+            <div class="scenario-description">
+                Ask for directions and understand replies.
+            </div>
+
+        </div>
+
+
+        <div class="scenario-card"
+             onclick="selectScenario('Shopping', '🛍️', 'Practice buying and comparing things.', this)">
+
+            <div class="icon">🛍️</div>
+
+            <div class="scenario-name">
+                Shopping
+            </div>
+
+            <div class="scenario-description">
+                Practice buying and comparing things.
+            </div>
+
+        </div>
+
+
+        <div class="scenario-card"
+             onclick="selectScenario('College', '🎓', 'Practice everyday student conversations.', this)">
+
+            <div class="icon">🎓</div>
+
+            <div class="scenario-name">
+                College
+            </div>
+
+            <div class="scenario-description">
+                Practice conversations with students and teachers.
+            </div>
+
+        </div>
+
+
+        <div class="scenario-card"
+             onclick="selectScenario('Interview', '💼', 'Practice professional interview conversations.', this)">
+
+            <div class="icon">💼</div>
+
+            <div class="scenario-name">
+                Interview
+            </div>
+
+            <div class="scenario-description">
+                Build confidence for professional situations.
+            </div>
+
+        </div>
+
+
+        <div class="scenario-card"
+             onclick="selectScenario('Meet Someone', '🤝', 'Practice introducing yourself and making conversation.', this)">
+
+            <div class="icon">🤝</div>
+
+            <div class="scenario-name">
+                Meet Someone
+            </div>
+
+            <div class="scenario-description">
+                Introduce yourself and keep the conversation going.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <button
+        id="startBtn"
+        class="start-btn"
+        onclick="startConversation()"
+        disabled>
+
+        Start AI Conversation →
+
+    </button>
+
+    <div id="message"></div>
+
+</div>
+
+
+<script>
+
+const token = localStorage.getItem("token");
+
+const language = JSON.parse(
+    localStorage.getItem("selectedLanguage")
+);
+
+let selectedScenario = null;
+
+
+// Check login
+
+if (!token) {
+    window.location.href = "login.html";
+}
+
+
+// Check selected language
+
+if (!language) {
+
+    window.location.href = "language.html";
+
+} else {
+
+    document.getElementById("selectedLanguage").textContent =
+        language.flag + " " +
+        language.name +
+        " selected";
+
+}
+
+
+// Select scenario
+
+function selectScenario(name, icon, description, element) {
+
+    selectedScenario = {
+        name: name,
+        icon: icon,
+        description: description
+    };
+
+
+    document.querySelectorAll(".scenario-card")
+        .forEach(card => {
+            card.classList.remove("selected");
+        });
+
+
+    element.classList.add("selected");
+
+
+    document.getElementById("startBtn").disabled = false;
+
+    document.getElementById("message").textContent = "";
+}
+
+
+// Start conversation
+
+function startConversation() {
+
+    if (!selectedScenario) {
+        return;
+    }
+
+    localStorage.setItem(
+        "selectedScenario",
+        JSON.stringify(selectedScenario)
+    );
+
+    localStorage.setItem(
+        "conversationMode",
+        "situation"
+    );
+
+    window.location.href = "call.html";
+}
+
+// Back
+
+function goBack() {
+
+    window.location.href = "language.html";
+
+}
+
+</script>
+
+</body>
+</html>

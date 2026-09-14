@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Choose Language - CallAmigo</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #e4eee5;
+            color: #17231d;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 75px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #e4eee5;
+            border-bottom: 1px solid #cbd9cd;
+        }
+
+.logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logo img {
+    width: 170px;
+    height: auto;
+    display: block;
+}
+
+        .back-btn {
+            border: 1px solid #cbd8ce;
+            background: #fffdf8;
+            color: #294438;
+            padding: 10px 17px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .back-btn:hover {
+            border-color: #1d6244;
+            transform: translateY(-1px);
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 950px;
+            margin: 65px auto;
+            padding: 0 25px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .heading h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #173c2c;
+            letter-spacing: -.6px;
+        }
+
+        .heading p {
+            color: #68756d;
+            line-height: 1.6;
+        }
+
+        /* ================= LANGUAGE CARDS ================= */
+
+        .languages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .language-card {
+            background: #fffdf8;
+            border: 1px solid #d4dfd5;
+            border-radius: 18px;
+            padding: 25px;
+            cursor: pointer;
+            transition: .2s;
+            box-shadow: 0 8px 25px rgba(30, 70, 45, .05);
+        }
+
+        .language-card:hover {
+            transform: translateY(-4px);
+            border-color: #7fa58c;
+            box-shadow: 0 12px 30px rgba(30, 70, 45, .09);
+        }
+
+        .language-card.selected {
+            border: 2px solid #1d6244;
+            background: #edf5ee;
+            box-shadow: 0 10px 25px rgba(29, 98, 68, .08);
+        }
+
+        .flag {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .language-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #294438;
+        }
+
+        .language-code {
+            color: #7b877f;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* ================= CONTINUE ================= */
+
+        .continue-btn {
+            display: block;
+            margin: 35px auto 0;
+            border: none;
+            background: #1d6244;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 11px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .continue-btn:hover:not(:disabled) {
+            background: #174d36;
+            transform: translateY(-1px);
+        }
+
+        .continue-btn:disabled {
+            background: #aebbb1;
+            cursor: not-allowed;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            color: #b25b5b;
+            font-size: 12px;
+            min-height: 18px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .container {
+                margin: 45px auto;
+                padding: 0 18px;
+            }
+
+            .heading h1 {
+                font-size: 32px;
+            }
+
+            .languages {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .language-card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .logo img {
+               width: 145px;
+            }
+            .back-btn {
+                padding: 9px 13px;
+                font-size: 12px;
+            }
+
+            .container {
+                margin: 35px auto;
+                padding: 0 16px;
+            }
+
+            .heading {
+                margin-bottom: 30px;
+            }
+
+            .heading h1 {
+                font-size: 28px;
+            }
+
+            .languages {
+                grid-template-columns: 1fr;
+            }
+
+            .language-card {
+                padding: 19px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+
+ <div class="logo">
+    <img src="callamigo-logo.png" alt="CallAmigo">
+</div>
+
+        <button class="back-btn" onclick="goBack()">
+            ← Dashboard
+        </button>
+
+    </nav>
+
+
+    <div class="container">
+
+        <div class="heading">
+
+            <h1>What do you want to practice? 🌍</h1>
+
+            <p>
+                Choose a language for your next conversation.
+            </p>
+
+        </div>
+
+
+        <div class="languages">
+
+            <div class="language-card"
+                 onclick="selectLanguage('English', 'EN', '🇬🇧', this)">
+
+                <div class="flag">🇬🇧</div>
+                <div class="language-name">English</div>
+                <div class="language-code">EN</div>
+
+            </div>
+
+
+            <div class="language-card"
+                 onclick="selectLanguage('Spanish', 'ES', '🇪🇸', this)">
+
+                <div class="flag">🇪🇸</div>
+                <div class="language-name">Spanish</div>
+                <div class="language-code">ES</div>
+
+            </div>
+
+
+            <div class="language-card"
+                 onclick="selectLanguage('Hindi', 'HI', '🇮🇳', this)">
+
+                <div class="flag">🇮🇳</div>
+                <div class="language-name">Hindi</div>
+                <div class="language-code">HI</div>
+
+            </div>
+
+
+            <div class="language-card"
+                 onclick="selectLanguage('Korean', 'KO', '🇰🇷', this)">
+
+                <div class="flag">🇰🇷</div>
+                <div class="language-name">Korean</div>
+                <div class="language-code">KO</div>
+
+            </div>
+
+
+            <div class="language-card"
+                 onclick="selectLanguage('French', 'FR', '🇫🇷', this)">
+
+                <div class="flag">🇫🇷</div>
+                <div class="language-name">French</div>
+                <div class="language-code">FR</div>
+
+            </div>
+
+
+            <div class="language-card"
+                 onclick="selectLanguage('German', 'DE', '🇩🇪', this)">
+
+                <div class="flag">🇩🇪</div>
+                <div class="language-name">German</div>
+                <div class="language-code">DE</div>
+
+            </div>
+
+
+            <div class="language-card"
+                 onclick="selectLanguage('Japanese', 'JA', '🇯🇵', this)">
+
+                <div class="flag">🇯🇵</div>
+                <div class="language-name">Japanese</div>
+                <div class="language-code">JA</div>
+
+            </div>
+
+
+            <div class="language-card"
+                 onclick="selectLanguage('Italian', 'IT', '🇮🇹', this)">
+
+                <div class="flag">🇮🇹</div>
+                <div class="language-name">Italian</div>
+                <div class="language-code">IT</div>
+
+            </div>
+
+
+            <div class="language-card"
+                 onclick="selectLanguage('Portuguese', 'PT', '🇧🇷', this)">
+
+                <div class="flag">🇧🇷</div>
+                <div class="language-name">Portuguese</div>
+                <div class="language-code">PT</div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="continueBtn"
+            class="continue-btn"
+            onclick="continueToSituation()"
+            disabled>
+
+            Continue →
+
+        </button>
+
+        <div id="message"></div>
+
+    </div>
+
+
+    <script>
+
+        const token = localStorage.getItem("token");
+
+        let selectedLanguage = null;
+
+
+        // Make sure user is logged in
+
+        if (!token) {
+            window.location.href = "login.html";
+        }
+
+
+        // Select language
+
+        function selectLanguage(name, code, flag, element) {
+
+            selectedLanguage = {
+                name: name,
+                code: code,
+                flag: flag
+            };
+
+            document.querySelectorAll(".language-card")
+                .forEach(card => {
+                    card.classList.remove("selected");
+                });
+
+            element.classList.add("selected");
+
+            document.getElementById("continueBtn").disabled = false;
+
+            document.getElementById("message").textContent = "";
+        }
+
+
+        // Continue
+
+        function continueToSituation() {
+
+            if (!selectedLanguage) {
+                return;
+            }
+
+            localStorage.setItem(
+                "selectedLanguage",
+                JSON.stringify(selectedLanguage)
+            );
+
+            window.location.href = "level.html";
+        }
+
+
+        // Back
+
+        function goBack() {
+
+            window.location.href = "dashboard.html";
+        }
+
+    </script>
+
+</body>
+
+</html>

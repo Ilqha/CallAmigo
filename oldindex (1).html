@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallAmigo — Speak Beyond Words</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#e4eee5;
+    color:#17231d;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    height:78px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#e4eee5;
+    border-bottom:1px solid #cbd9cd;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    width:170px;
+    height:auto;
+    display:block;
+}
+}
+.logo-mark{
+    width:40px;
+    height:40px;
+    border-radius:13px;
+    background:#1d6244;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:19px;
+}
+
+.nav-links{
+    display:flex;
+    gap:32px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#5e675f;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:#1d6244;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.login{
+    font-size:14px;
+    color:#465048;
+}
+
+.login-btn{
+    border:1px solid #d8d8cf;
+    background:white;
+    color:#465048;
+    padding:11px 19px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+}
+
+.login-btn:hover{
+    border-color:#1d6244;
+    color:#1d6244;
+}
+
+.nav-btn{
+    border:none;
+    background:#1d6244;
+    color:white;
+    padding:11px 19px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+/* ================= HERO ================= */
+
+.hero{
+    min-height:650px;
+    padding:75px 7%;
+    display:grid;
+    grid-template-columns:1fr 0.85fr;
+    align-items:center;
+    gap:80px;
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    background:#e7f0e6;
+    color:#276346;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:70px;
+    line-height:0.98;
+    letter-spacing:-4px;
+    font-weight:700;
+    margin-bottom:25px;
+}
+
+.hero h1 span{
+    color:#1d6244;
+}
+
+.hero p{
+    max-width:550px;
+    color:#687169;
+    font-size:17px;
+    line-height:1.7;
+    margin-bottom:32px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:12px;
+}
+
+.start-btn{
+    border:none;
+    background:#1d6244;
+    color:white;
+    padding:15px 25px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.demo-btn{
+    border:1px solid #d8d8cf;
+    background:white;
+    padding:15px 25px;
+    border-radius:12px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+/* ================= PHONE / TUTOR ================= */
+
+.hero-visual{
+    display:flex;
+    justify-content:center;
+}
+
+.phone{
+    width:330px;
+    min-height:470px;
+    background:#ffffff;
+    border:7px solid #1e2822;
+    border-radius:42px;
+    padding:25px 20px;
+    box-shadow:0 30px 60px rgba(33,54,42,.14);
+    position:relative;
+}
+
+.phone-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#7b837d;
+    font-size:11px;
+    margin-bottom:30px;
+}
+
+.call-status{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.call-status i{
+    width:7px;
+    height:7px;
+    background:#4ca66f;
+    border-radius:50%;
+}
+
+.tutor{
+    text-align:center;
+}
+
+.tutor-avatar{
+    width:90px;
+    height:90px;
+    margin:10px auto 18px;
+    border-radius:50%;
+    background:#e4eee2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    color:#1d6244;
+}
+
+.tutor h2{
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+.tutor small{
+    color:#89918b;
+}
+
+.speech{
+    margin-top:30px;
+    padding:17px;
+    border-radius:17px;
+    background:#f0f4ed;
+    text-align:left;
+    color:#465148;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.speech strong{
+    color:#1d6244;
+}
+
+.voice{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    margin-top:15px;
+}
+
+.voice span{
+    width:4px;
+    border-radius:5px;
+    background:#4b8769;
+}
+
+.voice span:nth-child(1){height:18px;}
+.voice span:nth-child(2){height:30px;}
+.voice span:nth-child(3){height:48px;}
+.voice span:nth-child(4){height:34px;}
+.voice span:nth-child(5){height:55px;}
+.voice span:nth-child(6){height:30px;}
+.voice span:nth-child(7){height:44px;}
+.voice span:nth-child(8){height:22px;}
+
+.call-button{
+    width:58px;
+    height:58px;
+    border:none;
+    border-radius:50%;
+    background:#1d6244;
+    color:white;
+    font-size:22px;
+    display:block;
+    margin:8px auto 7px;
+    cursor:pointer;
+}
+
+.phone-note{
+    text-align:center;
+    color:#909790;
+    font-size:10px;
+}
+
+/* ================= LANGUAGE STRIP ================= */
+
+/* ================= LANGUAGE SECTION ================= */
+
+.language-strip {
+    padding: 28px 7%;
+    border-top: 1px solid #cbd9cd;
+    border-bottom: 1px solid #cbd9cd;
+    background:  #dce9df;
+
+    display: flex;
+    justify-content: center;
+}
+
+.language-strip-inner {
+    width: 100%;
+    max-width: 1050px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+}
+
+.language-column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.language-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    color: #315c58;
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.language-item:hover {
+    background: #eef6f3;
+    color: #176244;
+    transform: translateX(3px);
+}
+
+.language-flag {
+    font-size: 21px;
+    line-height: 1;
+}
+
+.language-code {
+    font-size: 11px;
+    color: #8a9b97;
+    font-weight: 500;
+}
+
+
+/* ================= SECTION ================= */
+
+.section{
+    padding:90px 7%;
+}
+
+.section-heading{
+    max-width:650px;
+    margin:auto;
+    text-align:center;
+}
+
+.section-heading h2{
+    font-size:42px;
+    letter-spacing:-1.5px;
+    margin-bottom:13px;
+}
+
+.section-heading p{
+    color:#737b75;
+    line-height:1.6;
+}
+
+/* ================= FEATURES ================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    max-width:1050px;
+    margin:50px auto 0;
+}
+
+.feature{
+    background:white;
+    border:1px solid #e4e3db;
+    border-radius:22px;
+    padding:28px;
+    transition:.2s;
+}
+
+.feature:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(30,60,40,.08);
+}
+
+.feature-icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    background:#e8f0e6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    margin-bottom:20px;
+}
+
+.feature h3{
+    margin-bottom:9px;
+}
+
+.feature p{
+    color:#737b75;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard-section{
+    background:#d5e4d8;
+}
+
+.dashboard{
+    max-width:1120px;
+    margin:50px auto 0;
+    background:#fbfbf8;
+    border:1px solid #dfe4da;
+    border-radius:27px;
+    padding:25px;
+    display:grid;
+    grid-template-columns:190px 1fr;
+    gap:25px;
+    box-shadow:0 20px 60px rgba(40,60,45,.08);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    background:#193d2d;
+    color:white;
+    border-radius:20px;
+    padding:22px 15px;
+}
+
+.side-logo{
+    font-weight:bold;
+    margin-bottom:35px;
+    padding-left:8px;
+}
+
+.side-item{
+    padding:12px 10px;
+    border-radius:10px;
+    margin-bottom:6px;
+    color:#b8c9bd;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.side-item.active{
+    background:#2b5d46;
+    color:white;
+}
+
+/* MAIN DASHBOARD */
+
+.dashboard-main{
+    padding:5px 5px 10px;
+}
+
+.dashboard-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.dashboard-top h3{
+    font-size:21px;
+}
+
+.dashboard-top p{
+    color:#858d86;
+    font-size:12px;
+    margin-top:6px;
+}
+
+.streak{
+    background:#fff5d9;
+    color:#9a7020;
+    padding:10px 13px;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:600;
+}
+
+/* PRACTICE */
+
+.practice{
+    background:#e6efe4;
+    border-radius:19px;
+    padding:23px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:17px;
+}
+
+.practice-label{
+    color:#62806d;
+    font-size:11px;
+    margin-bottom:7px;
+}
+
+.practice h3{
+    font-size:21px;
+    margin-bottom:7px;
+}
+
+.practice p{
+    color:#69776e;
+    font-size:12px;
+}
+
+.practice-btn{
+    background:#1d6244;
+    color:white;
+    border:none;
+    padding:13px 17px;
+    border-radius:11px;
+    font-size:12px;
+    cursor:pointer;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:17px;
+}
+
+.stat{
+    background:white;
+    border:1px solid #e5e6df;
+    border-radius:15px;
+    padding:17px;
+}
+
+.stat small{
+    color:#858d86;
+}
+
+.stat strong{
+    display:block;
+    font-size:24px;
+    margin-top:7px;
+}
+
+/* RECENT */
+
+.recent{
+    background:white;
+    border:1px solid #e5e6df;
+    border-radius:17px;
+    padding:19px;
+}
+
+.recent h4{
+    margin-bottom:15px;
+}
+
+.session{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:11px 0;
+    border-bottom:1px solid #eeeeea;
+    font-size:12px;
+}
+
+.session:last-child{
+    border-bottom:none;
+}
+
+.session-left{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.session-icon{
+    width:31px;
+    height:31px;
+    border-radius:9px;
+    background:#edf2ea;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.session span{
+    color:#7b847d;
+}
+
+/* ================= SCENARIOS ================= */
+
+.scenario-grid{
+    max-width:1050px;
+    margin:50px auto 0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.scenario{
+    background:white;
+    border:1px solid #e5e4dc;
+    border-radius:19px;
+    padding:23px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.scenario:hover{
+    transform:translateY(-4px);
+    border-color:#a5bba8;
+}
+
+.scenario-icon{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.scenario h3{
+    font-size:15px;
+    margin-bottom:6px;
+}
+
+.scenario p{
+    color:#818981;
+    font-size:11px;
+    line-height:1.5;
+}
+
+/* ================= FEEDBACK ================= */
+
+.feedback-section{
+    background:#dce9df;
+}
+
+.feedback-card{
+    max-width:800px;
+    margin:50px auto 0;
+    background:white;
+    border:1px solid #e1e3da;
+    border-radius:22px;
+    padding:28px;
+}
+
+.feedback-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.score{
+    font-size:31px;
+    font-weight:bold;
+    color:#1d6244;
+}
+
+.score small{
+    font-size:10px;
+    color:#8b928c;
+}
+
+.correction{
+    padding:17px;
+    background:#f7f8f4;
+    border-radius:13px;
+    margin-top:10px;
+}
+
+.correction-title{
+    font-size:12px;
+    font-weight:bold;
+}
+
+.mistake{
+    color:#b25b5b;
+    font-size:12px;
+    margin-top:9px;
+}
+
+.better{
+    color:#357456;
+    font-size:12px;
+    margin-top:7px;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    padding:100px 7%;
+    text-align:center;
+}
+
+.cta h2{
+    font-size:48px;
+    letter-spacing:-2px;
+    margin-bottom:15px;
+}
+
+.cta p{
+    color:#737b75;
+    margin-bottom:27px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    padding:35px 7%;
+    border-top:1px solid #cbd9cd;
+    color:#818981;
+    text-align:center;
+    font-size:12px;
+}
+
+footer strong{
+    color:#1d6244;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-actions{
+        justify-content:center;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        display:none;
+    }
+
+    .scenario-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:550px){
+
+    .hero h1{
+        font-size:47px;
+    }
+
+    .phone{
+        width:300px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .scenario-grid{
+        grid-template-columns:1fr;
+    }
+
+    .practice{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:18px;
+    }
+        .language-strip-inner{
+        grid-template-columns:1fr;
+        gap:8px;
+    }
+
+    .language-column{
+        gap:6px;
+    }
+
+    .language-item{
+        width:100%;
+        padding:11px 14px;
+        min-width:0;
+    }
+
+    .language-item span:nth-child(2){
+        white-space:nowrap;
+    }
+
+    .language-code{
+        margin-left:auto;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+ <div class="logo">
+    <img src="callamigo-logo.png" alt="CallAmigo">
+</div>
+
+    <div class="nav-links">
+
+        <a href="#features">Features</a>
+        <a href="#languages">Languages</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#scenarios">Practice</a>
+
+    </div>
+
+
+    <div class="nav-right">
+
+        <button class="login-btn" onclick="login()">Log in</button>
+
+        <button class="nav-btn"
+                onclick="startLearning()">
+            Get started
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="pill">
+            ✦ AI-powered speaking practice
+        </div>
+
+
+        <h1>
+            Your language is waiting to be,
+            <span>Spoken.</span>
+        </h1>
+
+
+        <p>
+            Meet your AI language friend. CallAmigo helps you
+            practice real conversations, build speaking confidence,
+            and learn from your mistakes — one conversation at a time.
+        </p>
+
+
+        <div class="hero-actions">
+
+            <button class="start-btn"
+                    onclick="startLearning()">
+                Start practicing →
+            </button>
+
+            <button class="demo-btn"
+                    onclick="showDemo()">
+                See how it works
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PHONE -->
+
+    <div class="hero-visual">
+
+        <div class="phone">
+
+            <div class="phone-top">
+
+                <span>CallAmigo</span>
+
+                <div class="call-status">
+                    <i></i>
+                    Available
+                </div>
+
+            </div>
+
+
+            <div class="tutor">
+
+                <div class="tutor-avatar">
+                    ☎
+                </div>
+
+                <h2>Your language friend</h2>
+
+                <small>Spanish · Beginner</small>
+
+
+                <div class="speech">
+
+                    <strong>CallAmigo</strong>
+
+                    <br>
+
+                    "¡Hola! 👋
+                    ¿Cómo estuvo tu día?"
+
+                </div>
+
+
+                <div class="voice">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <button class="call-button"
+                        onclick="startCall()">
+                    ☎
+                </button>
+
+                <div class="phone-note">
+                    Tap to start a conversation
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LANGUAGES ================= -->
+
+<!-- ================= LANGUAGES ================= -->
+
+<section class="language-strip" id="languages">
+
+    <div class="language-strip-inner">
+
+        <!-- LEFT SIDE -->
+        <div class="language-column">
+
+            <div class="language-item">
+                <span class="language-flag">🇬🇧</span>
+                <span>English</span>
+                <span class="language-code">GB</span>
+            </div>
+
+            <div class="language-item">
+                <span class="language-flag">🇪🇸</span>
+                <span>Spanish</span>
+                <span class="language-code">ES</span>
+            </div>
+
+            <div class="language-item">
+                <span class="language-flag">🇮🇳</span>
+                <span>Hindi</span>
+                <span class="language-code">IN</span>
+            </div>
+
+            <div class="language-item">
+                <span class="language-flag">🇰🇷</span>
+                <span>Korean</span>
+                <span class="language-code">KR</span>
+            </div>
+
+            <div class="language-item">
+                <span class="language-flag">🇸🇦</span>
+                <span>Arabic</span>
+                <span class="language-code">SA</span>
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="language-column">
+
+            <div class="language-item">
+                <span class="language-flag">🇫🇷</span>
+                <span>French</span>
+                <span class="language-code">FR</span>
+            </div>
+
+            <div class="language-item">
+                <span class="language-flag">🇩🇪</span>
+                <span>German</span>
+                <span class="language-code">DE</span>
+            </div>
+
+            <div class="language-item">
+                <span class="language-flag">🇯🇵</span>
+                <span>Japanese</span>
+                <span class="language-code">JP</span>
+            </div>
+
+            <div class="language-item">
+                <span class="language-flag">🇮🇹</span>
+                <span>Italian</span>
+                <span class="language-code">IT</span>
+            </div>
+
+            <div class="language-item">
+                <span class="language-flag">🇧🇷</span>
+                <span>Portuguese</span>
+                <span class="language-code">BR</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="section" id="features">
+
+    <div class="section-heading">
+
+        <h2>
+            Practice that feels like a conversation.
+        </h2>
+
+        <p>
+            CallAmigo is designed around speaking,
+            not just memorizing.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+        <div class="feature">
+
+            <div class="feature-icon">☎</div>
+
+            <h3>Talk with your AI friend</h3>
+
+            <p>
+                Have natural voice conversations
+                at your own language level.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">✦</div>
+
+            <h3>Learn from mistakes</h3>
+
+            <p>
+                Understand grammar, vocabulary
+                and pronunciation improvements.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">↗</div>
+
+            <h3>Grow with every call</h3>
+
+            <p>
+                Your practice becomes progressively
+                more challenging as you improve.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section class="section dashboard-section"
+         id="dashboard">
+
+    <div class="section-heading">
+
+        <h2>
+            Your learning, in one place.
+        </h2>
+
+        <p>
+            See your conversations, progress and
+            next challenge at a glance.
+        </p>
+
+    </div>
+
+
+    <div class="dashboard">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="side-logo">
+                CallAmigo
+            </div>
+
+            <div class="side-item active">
+                ◉ Overview
+            </div>
+
+            <div class="side-item">
+                ☎ Conversations
+            </div>
+
+            <div class="side-item">
+                ◇ Practice
+            </div>
+
+            <div class="side-item">
+                ↗ Progress
+            </div>
+
+            <div class="side-item">
+                ⚙ Settings
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="dashboard-main">
+
+            <div class="dashboard-top">
+
+                <div>
+
+                    <h3>
+                        Good evening 👋
+                    </h3>
+
+                    <p>
+                        Ready for today's Spanish practice?
+                    </p>
+
+                </div>
+
+                <div class="streak">
+                    🔥 7 day streak
+                </div>
+
+            </div>
+
+
+            <!-- PRACTICE CARD -->
+
+            <div class="practice">
+
+                <div>
+
+                    <div class="practice-label">
+                        TODAY'S PRACTICE
+                    </div>
+
+                    <h3>
+                        🇪🇸 Spanish conversation
+                    </h3>
+
+                    <p>
+                        Daily routine · Beginner A1
+                    </p>
+
+                </div>
+
+
+                <button class="practice-btn"
+                        onclick="startCall()">
+
+                    🎙 Start conversation
+
+                </button>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <small>Speaking</small>
+
+                    <strong>72%</strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <small>Vocabulary</small>
+
+                    <strong>81%</strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <small>Grammar</small>
+
+                    <strong>68%</strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT -->
+
+            <div class="recent">
+
+                <h4>
+                    Recent conversations
+                </h4>
+
+
+                <div class="session">
+
+                    <div class="session-left">
+
+                        <div class="session-icon">
+                            ☕
+                        </div>
+
+                        <div>
+                            Café conversation
+                        </div>
+
+                    </div>
+
+                    <span>82%</span>
+
+                </div>
+
+
+                <div class="session">
+
+                    <div class="session-left">
+
+                        <div class="session-icon">
+                            👋
+                        </div>
+
+                        <div>
+                            Introductions
+                        </div>
+
+                    </div>
+
+                    <span>76%</span>
+
+                </div>
+
+
+                <div class="session">
+
+                    <div class="session-left">
+
+                        <div class="session-icon">
+                            🏠
+                        </div>
+
+                        <div>
+                            My daily routine
+                        </div>
+
+                    </div>
+
+                    <span>88%</span>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCENARIOS ================= -->
+
+<section class="section"
+         id="scenarios">
+
+    <div class="section-heading">
+
+        <h2>
+            Speak in real situations.
+        </h2>
+
+        <p>
+            Choose a situation and let your AI friend
+            take the conversation from there.
+        </p>
+
+    </div>
+
+
+    <div class="scenario-grid">
+
+        <div class="scenario">
+
+            <div class="scenario-icon">☕</div>
+
+            <h3>Café</h3>
+
+            <p>
+                Order food and drinks naturally.
+            </p>
+
+        </div>
+
+
+        <div class="scenario">
+
+            <div class="scenario-icon">✈️</div>
+
+            <h3>Airport</h3>
+
+            <p>
+                Practice useful travel conversations.
+            </p>
+
+        </div>
+
+
+        <div class="scenario">
+
+            <div class="scenario-icon">🏨</div>
+
+            <h3>Hotel</h3>
+
+            <p>
+                Check in and handle requests.
+            </p>
+
+        </div>
+
+
+        <div class="scenario">
+
+            <div class="scenario-icon">🚇</div>
+
+            <h3>Directions</h3>
+
+            <p>
+                Ask for directions and understand replies.
+            </p>
+
+        </div>
+
+
+        <div class="scenario">
+
+            <div class="scenario-icon">🛍️</div>
+
+            <h3>Shopping</h3>
+
+            <p>
+                Practice buying and comparing things.
+            </p>
+
+        </div>
+
+
+        <div class="scenario">
+
+            <div class="scenario-icon">🎓</div>
+
+            <h3>College</h3>
+
+            <p>
+                Practice everyday student conversations.
+            </p>
+
+        </div>
+
+
+        <div class="scenario">
+
+            <div class="scenario-icon">💼</div>
+
+            <h3>Interview</h3>
+
+            <p>
+                Build confidence for professional situations.
+            </p>
+
+        </div>
+
+
+        <div class="scenario">
+
+            <div class="scenario-icon">🤝</div>
+
+            <h3>Meet someone</h3>
+
+            <p>
+                Introduce yourself and keep the conversation going.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEEDBACK ================= -->
+
+<section class="section feedback-section"
+         id="feedback">
+
+    <div class="section-heading">
+
+        <h2>
+            Every mistake can become progress.
+        </h2>
+
+        <p>
+            After your conversation, CallAmigo shows
+            you what you can improve.
+        </p>
+
+    </div>
+
+
+    <div class="feedback-card">
+
+        <div class="feedback-top">
+
+            <div>
+
+                <h3>
+                    Conversation report
+                </h3>
+
+                <p style="color:#858d86;font-size:12px;margin-top:6px;">
+                    Spanish · Café scenario
+                </p>
+
+            </div>
+
+
+            <div class="score">
+
+                82%
+
+                <small>overall</small>
+
+            </div>
+
+        </div>
+
+
+        <div class="correction">
+
+            <div class="correction-title">
+                Grammar
+            </div>
+
+            <div class="mistake">
+                ✕ You said: "Yo fue al mercado."
+            </div>
+
+            <div class="better">
+                ✓ Better: "Yo fui al mercado."
+            </div>
+
+        </div>
+
+
+        <div class="correction">
+
+            <div class="correction-title">
+                ✦ New vocabulary
+            </div>
+
+            <div style="color:#687169;font-size:12px;margin-top:8px;">
+                mercado · temprano · después · comprar
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <h2>
+        Your next conversation<br>
+        is waiting.
+    </h2>
+
+    <p>
+        Start speaking. Let CallAmigo help you improve.
+    </p>
+
+    <button class="start-btn"
+            onclick="startLearning()">
+
+        Start learning →
+
+    </button>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <strong>CallAmigo</strong>
+
+    · AI-powered language conversation practice
+
+</footer>
+
+
+<script>
+
+function startLearning(){
+window.location.href = "signup.html";
+}
+
+function login(){
+    window.location.href = "login.html";
+}
+
+function startCall(){
+
+    alert(
+        "🎙 CallAmigo is preparing your conversation...\n\n"
+        + "This button will later connect to the real CALL-E voice agent."
+    );
+
+}
+
+function showDemo(){
+
+    alert(
+        "CallAmigo lets you practice real conversations, "
+        + "receive personalized corrections, and improve with every call."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
